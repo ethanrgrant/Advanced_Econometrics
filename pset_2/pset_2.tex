@@ -1,0 +1,114 @@
+\author{Ethan Grant uni: erg2145}
+\title{P-Set 2 Adv Econometrics}
+\date{\today}
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\begin{document}
+	\maketitle
+	\begin{enumerate}
+		\item
+			\begin{enumerate}[i)]
+				\item The difference between a finite sample and large sample test for a single regressors is that the finite sample uses the t stat without assuming it converges to the normal distribution while the large sample assumes it converges. For similar reasons the finite sample uses the F stat while the large sample assumes it converges to the Weld stat.
+				
+				Finite sample properties:  \newline
+				E[b|X] = E[b] = $\beta$ this means the least squares coefficient estimator is unbiased
+				$E[s^2|X] = E[s^2] = \sigma^2$ The disturbance variance  estimator is unbiased \newline
+				$Var[b|X] = \sigma^2(X'X)^{-1}$ and $Var[b] = \sigma^2E[(X'X)^{-1}]$ \newline
+				The MVLUE of $w'\beta$ is $w'b$ for any vector of constants w \newline 
+				
+				 Large sample properties: 
+				 Large sample estimator is consistent as opposed to unbiased which means that it gets closer to the real value as more data is added\newline
+				normality of the least squares estimators \newline \newline
+				Asymptotic Properties: \newline
+				Asymptotic efficiency. The estimator is consistent, asymptotically normally distributed, and has an asymptotic covariance matrix that is not larger than the asymptotic covariance matrix of any other consistent, asymptotically normally distributed estimator. \newline
+				\item see code
+				\item estimates for beta: \newline
+				beta\_hat \newline
+				[,1] \newline
+				intercept -3.5265028 \newline
+				log\_Q      0.7203941 \newline
+				log\_PL     0.4363412 \newline
+				log\_PK     0.4265170 \newline
+				log\_PF    -0.2198884 \newline
+				
+				
+				centered r squared = .926 \newline
+				uncentered r squared = .924 \newline
+				
+				\item  v\_homoskedastic: \newline
+				              intercept       log\_Q       log\_PL      log\_PK       log\_PF \newline
+				            intercept 456.5147020 -0.63344719 -20.43035532  1.03617608 -85.67561184 \newline
+				            log\_Q      -0.6334472  0.04423607  -0.06594069  0.04564141   0.04678118 \newline
+				            log\_PL    -20.4303553 -0.06594069  12.28276319 -1.58647862   3.43306676 \newline
+				            log\_PK      1.0361761  0.04564141  -1.58647862  1.46072497  -0.96127964 \newline
+				            log\_PF    -85.6756118  0.04678118   3.43306676 -0.96127964  16.70570957 \newline
+				            \newline
+				       v\_White: \newline
+				                  intercept       log\_Q      log\_PL      log\_PK      log\_PF \newline
+				                  intercept 413.502348 -1.92249509 -20.3585472  2.95030665 -76.9223976 \newline
+				                  log\_Q      -1.922495  0.14876383  -0.1937918 -0.03367381   0.2117281 \newline
+				                  log\_PL    -20.358547 -0.19379182   8.4471721 -1.20038898   3.9181152 \newline
+				                  log\_PK      2.950307 -0.03367381  -1.2003890  0.79766956  -0.8560857 \newline
+				                  log\_PF    -76.922398  0.21172813   3.9181152 -0.85608566  14.6796013 \newline
+				                  \newline
+				      
+				       
+				\item The SE's (square root of values reported above) are all very close to each other which indicates that they are consistent as at larger values of N we would imagine they would get even closer.
+				\item If $\beta_{3} + \beta_{4} + \beta_{5}=1$ it means that a 1 unit increase in the log of price of labor, fuels, and capital leads to a 100\% increase in Y so it is exact returns to scale.
+				\item 
+				R = [0,0,1,1,1]\newline
+				q = [1] \newline
+				$R\beta=q$: \newline
+				$[0,0,1,1,1]\%*\%t([\beta_{1},\beta_{2},\beta_{3}, \beta_{4},\beta_{5}])=1$ \newline
+				\item the limiting distribution of the wald statistic is the chi squared distribution with a single degree of freedom. Wald = .0046
+				\item fail to reject the null
+				\item regression becomes $Y=\beta_{1}+\beta_{2}*ln(Q)+\beta_3*X_3+\beta_4*(X_4-X_3)+\beta_5(X_5-X_3)$
+				\newline 
+				$Y=\beta_{1}+\beta_{2}*ln(Q)+(\beta_3-\beta_4-\beta_5)X_3+\beta_4*X_4+\beta_5*X_5$ \newline
+				Then test that the new beta is =0
+				\item abs(t) =.0679 so fail to reject the null
+				\item  Greater than 1 means increasing returns to scale while less than 1 means decreasing returns to scale.I conclude that you should fail to reject both hypotheses.
+				\item  This null hypothesis allows us to test if at least one of the inputs has no effect because if any beta =0 then the whole expersion is equal to zero. Thus, if one is zero we would fail to reject the null. The appropriate test is a wald test which is large sample. \newline
+				\newline
+				You use the white standard error that was computed above \newline
+				You also need to compute $\beta_4*beta_5$, $\beta_3*beta_5$, $\beta_4*beta_3$, to make your G matrix \newline \newline
+				The appropriate test statistic is the chi-squared distribution with 1 degree of freedom
+				\item w\_stat = .0036 so don't reject the null
+			\end{enumerate}
+			\item
+			\begin{enumerate}[i)]
+				\item $E[\epsilon_i|x_i]=E[e^{x_i}*u_i|x_i]=e^{x_{i}}*E[u_i|x_i]=0$
+				\item $Var[\epsilon_i|x_i]=Var[e^{x_i}*u_i|x_i] = e^{x_{i}}*Var[u_i|x_i]=e^{x_i}*\sigma_y$
+				\newline
+				The variance is dependent on the value of $x_i$ which means it is not homoskedastic
+				\item The OLS assumptions are not satisified because the variance is a function of $x_i$ meaning that the errors are not spherical and assumption A4 is violated.
+				\item homoskedatic SE rejection = 0/1000 \newline
+				heteroskedastic SE rejeciton = 0/1000 \newline
+				The tests seem to have an asymptotic size equal to 0\% as in this large sample they reject 0\% of the time
+				\item using $2x_i$: \newline
+				homoskedatic SE rejection = 0/1000 \newline
+				heteroskedastic SE rejeciton = 0/1000 \newline
+				\newline
+				using $.1x_i$: \newline
+				homoskedatic SE rejection = 0/1000 \newline
+				heteroskedastic SE rejeciton = 0/1000 \newline
+				\newline
+				using $0x_i$: \newline
+				homoskedatic SE rejection = 0/1000 \newline
+				heteroskedastic SE rejeciton = 0/1000 \newline
+				\newline
+				I conclude they are all the same due to large sample size
+				\item It does not seem important to use white SE if sample size is large
+				\item Factor the sigma matrix into P'P and then rotate the data in the following manner \newline
+				
+				$y* = Py$ \newline
+				$X* = Px$ \newline
+				$e* = Pe$ \newline
+				
+				So you need to first run the regression using the usual OLS method to get the residuals and the sigma matrix. Once that is done you factor the matrix and rotate the data as described above. Then you run the regression again using the usual method, but with the rotated data.
+			\end{enumerate}
+	\end{enumerate}
+\end{document}
